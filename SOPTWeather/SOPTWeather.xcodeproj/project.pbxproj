@@ -43,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E60E832AE2E0AB005035D3 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +182,9 @@
 			dependencies = (
 			);
 			name = SOPTWeather;
+			packageProductDependencies = (
+				36E60E822AE2E0AB005035D3 /* SnapKit */,
+			);
 			productName = SOPTWeather;
 			productReference = 36E60E3D2AE180FA005035D3 /* SOPTWeather.app */;
 			productType = "com.apple.product-type.application";
@@ -209,6 +213,9 @@
 				Base,
 			);
 			mainGroup = 36E60E342AE180F9005035D3;
+			packageReferences = (
+				36E60E812AE2E0AB005035D3 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 36E60E3E2AE180FA005035D3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -454,6 +461,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		36E60E812AE2E0AB005035D3 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		36E60E822AE2E0AB005035D3 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 36E60E812AE2E0AB005035D3 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 36E60E352AE180F9005035D3 /* Project object */;
 }
