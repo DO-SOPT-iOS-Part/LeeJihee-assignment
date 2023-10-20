@@ -19,6 +19,8 @@
 		36E60E712AE257F2005035D3 /* SF-Pro-Display-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 36E60E6C2AE257F2005035D3 /* SF-Pro-Display-Thin.otf */; };
 		36E60E732AE2595D005035D3 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E60E722AE2595D005035D3 /* Font.swift */; };
 		36E60E772AE25975005035D3 /* ImageLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E60E762AE25975005035D3 /* ImageLiterals.swift */; };
+		36E60E7A2AE26566005035D3 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E60E792AE26566005035D3 /* UIView+.swift */; };
+		36E60E7C2AE2656C005035D3 /* UIStackView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E60E7B2AE2656C005035D3 /* UIStackView+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		36E60E6C2AE257F2005035D3 /* SF-Pro-Display-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Thin.otf"; sourceTree = "<group>"; };
 		36E60E722AE2595D005035D3 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		36E60E762AE25975005035D3 /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
+		36E60E792AE26566005035D3 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		36E60E7B2AE2656C005035D3 /* UIStackView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,8 @@
 		36E60E5A2AE245B1005035D3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				36E60E792AE26566005035D3 /* UIView+.swift */,
+				36E60E7B2AE2656C005035D3 /* UIStackView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -247,6 +253,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E60E7C2AE2656C005035D3 /* UIStackView+.swift in Sources */,
+				36E60E7A2AE26566005035D3 /* UIView+.swift in Sources */,
 				36E60E732AE2595D005035D3 /* Font.swift in Sources */,
 				36E60E772AE25975005035D3 /* ImageLiterals.swift in Sources */,
 				36E60E452AE180FA005035D3 /* ViewController.swift in Sources */,
