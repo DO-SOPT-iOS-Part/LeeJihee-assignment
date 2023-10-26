@@ -10,6 +10,11 @@ import SnapKit
 
 class LocationListElementView: UIButton {
     
+    var weatherData = WeatherDateModel(cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: []){
+        didSet{
+            bindData()
+        }
+    }
     
     private let backgroundImageView: UIImageView = {
        let imageView = UIImageView()
@@ -63,13 +68,12 @@ class LocationListElementView: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(title: String, city:String, weather: String, nowTemp: String, maxmin: String) {
-        super.init(frame: .zero)
-        locationTitleLabel.text = title
-        locationLabel.text = city
-        weatherLabel.text = weather
-        tempLabel.text = nowTemp
-        maxMinTempLabel.text = maxmin
+    func bindData() {
+        locationTitleLabel.text = weatherData.cityName
+        locationLabel.text = weatherData.subTitle
+        weatherLabel.text = weatherData.weatherText
+        tempLabel.text = weatherData.weatherinfomation.first?.tempText
+        maxMinTempLabel.text = weatherData.maxminTemp
         setUI()
     }
     

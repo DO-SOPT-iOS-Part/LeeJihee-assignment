@@ -12,30 +12,13 @@ class WeatherDetailView: UIView {
     
     // MARK: - Variables
     // MARK: Property
-    private var detailWeatherList: [TodayWeatherModel] =
-    [TodayWeatherModel(time: "Now", weatherIconImage: ImageLiterals.cloudMoonIcon, tempText: "21°"),
-     TodayWeatherModel(time: "10시", weatherIconImage: ImageLiterals.drizzleRainIcon, tempText: "21°"),
-     TodayWeatherModel(time: "11시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "19°"),
-     TodayWeatherModel(time: "12시", weatherIconImage: ImageLiterals.cloudBoltIcon, tempText: "19°"),
-     TodayWeatherModel(time: "13시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "19°"),
-     TodayWeatherModel(time: "14시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "24°"),
-     TodayWeatherModel(time: "15시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "26°"),
-     TodayWeatherModel(time: "16시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "28°"),
-     TodayWeatherModel(time: "17시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "29°")]
+    private var detailWeatherList: [TodayWeatherModel] = []
     
     // MARK: Component
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = ImageLiterals.backgroundFull
         return imageView
-    }()
-    
-    private let pageController: UIPageControl = {
-        let pageControl = UIPageControl()
-        pageControl.numberOfPages = 2
-        pageControl.tintColor = .white
-        pageControl.setCurrentPageIndicatorImage(ImageLiterals.locationIcon, forPage: 0)
-        return pageControl
     }()
     
     private let cityTitleLabel: UILabel = {
@@ -162,8 +145,7 @@ class WeatherDetailView: UIView {
                          weatherStackView,
                          weatherDetailStackView,
                          mapButton,
-                         listButton,
-                         pageController)
+                         listButton)
         
         timeWeatherScrollView.addSubview(timeStackView)
         
@@ -215,19 +197,18 @@ class WeatherDetailView: UIView {
             $0.size.equalTo(44)
         }
         
-        pageController.snp.makeConstraints {
-            $0.bottom.equalToSuperview().inset(44)
-            $0.centerX.equalToSuperview()
-        }
     }
     
     
     // MARK: Custom Function
     func setInfomation(city: String, temp: String,
-                       weather: String, minmax: String) {
+                       weather: String, minmax: String,
+                       weatherDetail: [TodayWeatherModel]) {
         cityTitleLabel.text = city
         tempTitleLabel.text = temp
         weatherLabel.text = weather
         maxMinTempLabel.text = minmax
+        detailWeatherList  = weatherDetail
+        setUI()
     }
 }
