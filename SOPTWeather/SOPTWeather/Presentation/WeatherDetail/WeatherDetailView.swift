@@ -122,14 +122,14 @@ class WeatherDetailView: UIView {
         return stackView
     }()
     
-    private let mapButton: UIButton = {
+    let mapButton: UIButton = {
         let button = UIButton()
         button.setImage(ImageLiterals.mapIcon, for: .normal)
         button.tintColor = .white
         return button
     }()
     
-    private let listButton: UIButton = {
+    let listButton: UIButton = {
         let button = UIButton()
         button.setImage(ImageLiterals.listIcon, for: .normal)
         button.tintColor = .white

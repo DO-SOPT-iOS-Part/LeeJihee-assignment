@@ -18,11 +18,18 @@ class WeatherDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        addTarget()
     }
     
+    func addTarget() {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        weatherDetailView.listButton.addTarget(self, action: #selector(tapListButton), for: .touchUpInside)
+    }
     
+    @objc func tapListButton() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension WeatherDetailViewController : UIGestureRecognizerDelegate { }

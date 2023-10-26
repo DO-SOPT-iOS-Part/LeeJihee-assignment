@@ -10,6 +10,7 @@ import SnapKit
 
 class LocationListElementView: UIButton {
     
+    
     private let backgroundImageView: UIImageView = {
        let imageView = UIImageView()
         imageView.image = ImageLiterals.backgroundList
@@ -29,7 +30,6 @@ class LocationListElementView: UIButton {
         let label = UILabel()
         label.font = .sfProMedium17
         label.textColor = .white
-        label.text = "의정부시"
         return label
     }()
     
@@ -37,7 +37,6 @@ class LocationListElementView: UIButton {
         let label = UILabel()
         label.font = .sfProMedium16
         label.textColor = .white
-        label.text = "흐림"
         return label
     }()
     
@@ -45,7 +44,6 @@ class LocationListElementView: UIButton {
         let label = UILabel()
         label.font = .sfProLight52
         label.textColor = .white
-        label.text = "21°"
         return label
     }()
     
@@ -53,7 +51,6 @@ class LocationListElementView: UIButton {
         let label = UILabel()
         label.font = .sfProMedium15
         label.textColor = .white
-        label.text = "최고:29° 최저:15°"
         return label
     }()
     
@@ -65,6 +62,17 @@ class LocationListElementView: UIButton {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    init(title: String, city:String, weather: String, nowTemp: String, maxmin: String) {
+        super.init(frame: .zero)
+        locationTitleLabel.text = title
+        locationLabel.text = city
+        weatherLabel.text = weather
+        tempLabel.text = nowTemp
+        maxMinTempLabel.text = maxmin
+        setUI()
+    }
+    
     private func setUI(){
         setViewHierarchy()
         setConstraints()
