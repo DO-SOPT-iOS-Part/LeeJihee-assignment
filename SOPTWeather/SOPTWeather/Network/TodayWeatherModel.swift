@@ -11,6 +11,8 @@ import UIKit
 
 struct WeatherDateModel {
     var cityName: String
+    var weatherText: String
+    var maxminTemp: String
     var weatherinfomation: [TodayWeatherModel]
 }
 
