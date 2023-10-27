@@ -98,12 +98,24 @@ class LocationListViewController: UIViewController {
     @objc func tapListView(sender: LocationListElementView) {
         //        let weatherDetailViewController = WeatherDetailViewController()
         //        weatherDetailViewController.weatherData = sender.weatherData
-        
-        for i in 0..<cityWeatherList.count {
-            let weatherDeatilViewController = WeatherDetailViewController()
-            weatherDeatilViewController.weatherData = cityWeatherList[i]
-            pageController.contentControllers.append(weatherDeatilViewController)
-        }
+        guard let index = cityWeatherList.firstIndex(where: { $0.cityName == sender.weatherData.cityName }) else {
+               return
+           }
+
+           // Initialize an array of WeatherDetailViewController instances for all cities
+           let allWeatherDetailControllers: [WeatherDetailViewController] = cityWeatherList.map { weatherData in
+               let weatherDetailViewController = WeatherDetailViewController()
+               weatherDetailViewController.weatherData = weatherData
+               return weatherDetailViewController
+           }
+
+           // Set the contentControllers array with all WeatherDetailViewController instances
+           pageController.contentControllers = allWeatherDetailControllers
+
+           // Set the selected WeatherDetailViewController as the first page in the page controller
+           pageController.setViewControllers([allWeatherDetailControllers[index]], direction: .forward, animated: true, completion: nil)
+
+    
         navigationController?.pushViewController(pageController, animated: true)
     }
 }
