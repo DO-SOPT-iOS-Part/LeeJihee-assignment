@@ -12,23 +12,18 @@ class WeatherDetailPageViewController: UIPageViewController, UIPageViewControlle
     // Your array of view controllers
     var contentControllers: [UIViewController] = []
     var pageControl = UIPageControl()
+    var index = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set the data source and delegate
         dataSource = self
         delegate = self
-        
-        // Set the initial view controller
-        if let firstViewController = contentControllers.first {
-            setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
-        }
+        setViewControllers([contentControllers[index]], direction: .forward, animated: true, completion: nil)
         setupPageControl()
     }
     
     func setupPageControl() {
-        // Configure the appearance of the page control
         pageControl.numberOfPages = contentControllers.count
         pageControl.currentPage = 0
         pageControl.tintColor = .white
@@ -44,10 +39,10 @@ class WeatherDetailPageViewController: UIPageViewController, UIPageViewControlle
         }
     }
     
+    
     // MARK: - UIPageViewControllerDataSource
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        // Implement this method to provide the view controller before the given view controller
         if let currentIndex = contentControllers.firstIndex(of: viewController), currentIndex > 0 {
             return contentControllers[currentIndex - 1]
         }
@@ -55,7 +50,6 @@ class WeatherDetailPageViewController: UIPageViewController, UIPageViewControlle
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        // Implement this method to provide the view controller after the given view controller
         if let currentIndex = contentControllers.firstIndex(of: viewController), currentIndex < contentControllers.count - 1 {
             return contentControllers[currentIndex + 1]
         }
@@ -74,10 +68,8 @@ class WeatherDetailPageViewController: UIPageViewController, UIPageViewControlle
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         if let pendingViewController = pendingViewControllers.first,
            let index = contentControllers.firstIndex(of: pendingViewController) {
-            // Update the page control to reflect the pending view controller
             pageControl.currentPage = index
         }
     }
-    
     
 }
