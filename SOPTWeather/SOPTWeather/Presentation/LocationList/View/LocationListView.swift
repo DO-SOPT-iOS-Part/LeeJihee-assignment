@@ -37,7 +37,11 @@ class LocationListView: UIView {
         return searchBar
     }()
     
-    let scrollView = UIScrollView()
+    let scrollView: UIScrollView = {
+       let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        return scrollView
+    }()
     
     let locationListStackView : UIStackView = {
         let stackView = UIStackView()
@@ -66,7 +70,9 @@ class LocationListView: UIView {
         self.addSubViews(listTitle,
                          moreButton,
                          searchBar,
-                         locationListStackView)
+                         scrollView)
+        
+        scrollView.addSubview(locationListStackView)
         
     }
     
@@ -87,9 +93,16 @@ class LocationListView: UIView {
             $0.leading.trailing.equalToSuperview().inset(20)
         }
         
-        locationListStackView.snp.makeConstraints {
+        scrollView.snp.makeConstraints {
             $0.top.equalTo(searchBar.snp.bottom).offset(15)
             $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview()
         }
+        
+        locationListStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
     }
 }

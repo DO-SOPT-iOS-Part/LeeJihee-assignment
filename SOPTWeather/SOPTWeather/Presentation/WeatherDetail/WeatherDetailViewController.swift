@@ -21,7 +21,7 @@ class WeatherDetailViewController: UIViewController {
     }
     
     func setView() {
-        weatherDetailView.setInfomation(city: weatherData.cityName, temp: weatherData.weatherinfomation[0].tempText, weather: weatherData.weatherText, minmax: weatherData.maxminTemp, weatherDetail: weatherData.weatherinfomation)
+   weatherDetailView.setInfomation(city: weatherData.cityName, temp: weatherData.weatherinfomation[0].tempText, weather: weatherData.weatherText, minmax: weatherData.maxminTemp, weatherDetail: weatherData.weatherinfomation)
         
         view.addSubview(weatherDetailView)
         
