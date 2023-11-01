@@ -10,8 +10,6 @@ import SnapKit
 
 class LocationListView: UIView {
     // MARK: - Variables
-    // MARK: Constants
-    
     // MARK: Property
     
     // MARK: Component
@@ -39,13 +37,16 @@ class LocationListView: UIView {
         return searchBar
     }()
     
+    let scrollView: UIScrollView = {
+       let scrollView = UIScrollView()
+        scrollView.alwaysBounceVertical = true
+        return scrollView
+    }()
     
-    
-    let locationListElementView = LocationListElementView()
-    
-    private lazy var locationListStackView : UIStackView = {
+    let locationListStackView : UIStackView = {
         let stackView = UIStackView()
-        stackView.addArrangedSubview(locationListStackView)
+        stackView.axis = .vertical
+        stackView.spacing = 16
         return stackView
     }()
     
@@ -69,7 +70,10 @@ class LocationListView: UIView {
         self.addSubViews(listTitle,
                          moreButton,
                          searchBar,
-                         locationListElementView)
+                         scrollView)
+        
+        scrollView.addSubview(locationListStackView)
+        
     }
     
     private func setConstraints() {
@@ -89,9 +93,16 @@ class LocationListView: UIView {
             $0.leading.trailing.equalToSuperview().inset(20)
         }
         
-        locationListElementView.snp.makeConstraints {
+        scrollView.snp.makeConstraints {
             $0.top.equalTo(searchBar.snp.bottom).offset(15)
             $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview()
         }
+        
+        locationListStackView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
     }
 }
