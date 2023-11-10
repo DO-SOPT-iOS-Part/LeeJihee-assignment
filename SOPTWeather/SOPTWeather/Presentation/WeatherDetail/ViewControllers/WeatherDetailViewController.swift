@@ -12,17 +12,17 @@ import SnapKit
 class WeatherDetailViewController: UIViewController {
     
     
-    let weeklyWeatherData: [DayWeatherModel] = [DayWeatherModel(day: "오늘", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "15°", maxTempText: "29°"),
-        DayWeatherModel(day: "월", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "18°", maxTempText: "27°"),
-        DayWeatherModel(day: "화", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "20°", maxTempText: "25°"),
-        DayWeatherModel(day: "수", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "17°", maxTempText: "25°"),
-        DayWeatherModel(day: "목", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "18°", maxTempText: "27°"),
-        DayWeatherModel(day: "금", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "18°", maxTempText: "27°"),
-        DayWeatherModel(day: "토", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "18°", maxTempText: "27°"),
-        DayWeatherModel(day: "일", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "18°", maxTempText: "27°"),
-        DayWeatherModel(day: "월", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "18°", maxTempText: "27°"),
-        DayWeatherModel(day: "화", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "18°", maxTempText: "27°"),
-        DayWeatherModel(day: "수", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysTemplate), minTempText: "18°", maxTempText: "27°")
+    let weeklyWeatherData: [DayWeatherModel] = [DayWeatherModel(day: "오늘", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "15°", maxTempText: "29°", gradientImage: ImageLiterals.todayTempGradient),
+                                                DayWeatherModel(day: "월", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "18°", maxTempText: "27°", gradientImage: ImageLiterals.oneDayTempGradient),
+                                                DayWeatherModel(day: "화", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "20°", maxTempText: "25°", gradientImage: ImageLiterals.twoDayTempGradient),
+                                                DayWeatherModel(day: "수", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "17°", maxTempText: "25°", gradientImage: ImageLiterals.threeDayTempGradient),
+                                                DayWeatherModel(day: "목", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "18°", maxTempText: "27°", gradientImage: ImageLiterals.fourDayTempGradient),
+                                                DayWeatherModel(day: "금", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "18°", maxTempText: "27°", gradientImage: ImageLiterals.fiveDayTempGradient),
+                                                DayWeatherModel(day: "토", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "18°", maxTempText: "27°", gradientImage: ImageLiterals.sixDayTempGradient),
+                                                DayWeatherModel(day: "일", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "18°", maxTempText: "27°", gradientImage: ImageLiterals.sevenDayTempGradient),
+                                                DayWeatherModel(day: "월", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "18°", maxTempText: "27°", gradientImage: ImageLiterals.eightDayTempGradient),
+                                                DayWeatherModel(day: "화", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "18°", maxTempText: "27°", gradientImage: ImageLiterals.nineDayTempGradient),
+                                                DayWeatherModel(day: "수", weatherIconImage: ImageLiterals.sunIcon.withRenderingMode(.alwaysOriginal), minTempText: "18°", maxTempText: "27°", gradientImage: ImageLiterals.tenDayTempGradient)
     ]
     
     
@@ -37,7 +37,8 @@ class WeatherDetailViewController: UIViewController {
     }
     
     func setView() {
-   weatherDetailView.setInfomation(city: weatherData.cityName, temp: weatherData.weatherinfomation[0].tempText, weather: weatherData.weatherText, minmax: weatherData.maxminTemp, weatherDetail: weatherData.weatherinfomation)
+        cityWeatherDeatilView.detailWeatherData = weatherData
+        cityWeatherDeatilView.weekWeatherData = weeklyWeatherData
         
         view.addSubview(cityWeatherDeatilView)
         
@@ -49,7 +50,7 @@ class WeatherDetailViewController: UIViewController {
     func addTarget() {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-        weatherDetailView.listButton.addTarget(self, action: #selector(tapListButton), for: .touchUpInside)
+        cityWeatherDeatilView.listButton.addTarget(self, action: #selector(tapListButton), for: .touchUpInside)
     }
     
     func setDelegate() {
