@@ -14,7 +14,7 @@ class LocationListView: UIView {
     
     // MARK: Component
     let listTitle: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.font = .sfProBold36
         label.textColor = .white
         label.text = "날씨"
@@ -22,7 +22,7 @@ class LocationListView: UIView {
     }()
     
     let moreButton: UIButton = {
-       let button = UIButton()
+        let button = UIButton()
         button.setImage(ImageLiterals.ellipsisIcon, for: .normal)
         button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         button.tintColor = .white
@@ -30,13 +30,21 @@ class LocationListView: UIView {
     }()
     
     let searchBar: UISearchBar = {
-       let searchBar = UISearchBar()
+        let searchBar = UISearchBar()
         searchBar.backgroundColor = .clear
         searchBar.placeholder = "도시 또는 공항 검색"
         searchBar.barStyle = .black
         return searchBar
     }()
     
+    lazy var weatherTableView: UITableView = {
+       let tableView = UITableView()
+        tableView.backgroundColor = .clear
+        tableView.register(WeatherListTableViewCell.self, forCellReuseIdentifier: WeatherListTableViewCell.cellReuseIdentifier)
+        return tableView
+    }()
+    
+    /// scrollView 이용
     let scrollView: UIScrollView = {
        let scrollView = UIScrollView()
         scrollView.alwaysBounceVertical = true
@@ -70,9 +78,9 @@ class LocationListView: UIView {
         self.addSubViews(listTitle,
                          moreButton,
                          searchBar,
-                         scrollView)
+                         weatherTableView)
         
-        scrollView.addSubview(locationListStackView)
+       // scrollView.addSubview(locationListStackView)
         
     }
     
@@ -93,15 +101,10 @@ class LocationListView: UIView {
             $0.leading.trailing.equalToSuperview().inset(20)
         }
         
-        scrollView.snp.makeConstraints {
+        weatherTableView.snp.makeConstraints {
             $0.top.equalTo(searchBar.snp.bottom).offset(15)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview()
-        }
-        
-        locationListStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-            $0.centerX.equalToSuperview()
         }
         
     }
