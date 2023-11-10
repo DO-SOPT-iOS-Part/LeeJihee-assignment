@@ -120,7 +120,6 @@ extension LocationListViewController: UISearchBarDelegate {
             locationView.locationListStackView.clearSubViews()
             bindData()
         } else {
-            let filteredCities = cityWeatherList.filter { $0.cityName.lowercased().contains(searchText.lowercased()) }
             locationView.locationListStackView.clearSubViews()
             for cityWeather in filteredCities {
                 let elementView = LocationListElementView()

@@ -12,7 +12,7 @@ class WeatherDetailView: UIView {
     
     // MARK: - Variables
     // MARK: Property
-    private var detailWeatherList: [TodayWeatherModel] = []
+    private var detailWeatherList: [TimeWeatherModel] = []
     
     // MARK: Component
     let scrollView: UIScrollView = {
@@ -215,7 +215,7 @@ class WeatherDetailView: UIView {
     // MARK: Custom Function
     func setInfomation(city: String, temp: String,
                        weather: String, minmax: String,
-                       weatherDetail: [TodayWeatherModel]) {
+                       weatherDetail: [TimeWeatherModel]) {
         cityTitleLabel.text = city
         tempTitleLabel.text = temp
         weatherLabel.text = weather

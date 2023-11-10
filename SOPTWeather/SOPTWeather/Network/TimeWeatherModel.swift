@@ -14,12 +14,14 @@ struct WeatherDateModel {
     var subTitle: String = ""
     var weatherText: String
     var maxminTemp: String
-    var weatherinfomation: [TodayWeatherModel]
+    var weatherinfomation: [TimeWeatherModel]
 }
 
 
-struct TodayWeatherModel {
+struct TimeWeatherModel {
     var time: String
     var weatherIconImage: UIImage
     var tempText: String
 }
+
+struct
