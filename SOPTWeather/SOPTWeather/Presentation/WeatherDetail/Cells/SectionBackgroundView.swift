@@ -7,19 +7,28 @@
 
 import UIKit
 
-class HeaderView: UICollectionReusableView {
-    static var reuseId = "HeaderView"
-    
+class SectionBackgroundView: UICollectionReusableView {
+    private let backgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.layer.borderColor = UIColor.white.cgColor
+        view.layer.borderWidth = 0.5
+        view.layer.cornerRadius = 15
+        return view
+    }()
+
     override init(frame: CGRect) {
-            super.init(frame: frame)
-            setupUI()
-        }
+        super.init(frame: frame)
+        backgroundColor = .clear
+        addSubview(backgroundView)
 
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
+        backgroundView.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(10)
         }
+    }
 
-        private func setupUI() {
-            // 헤더 뷰의 UI 구성을 설정합니다.
-        }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
