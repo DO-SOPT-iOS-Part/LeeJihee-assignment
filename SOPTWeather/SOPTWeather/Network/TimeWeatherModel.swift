@@ -24,4 +24,11 @@ struct TimeWeatherModel {
     var tempText: String
 }
 
-struct
+struct DayWeatherModel {
+    var day: String
+    var weatherIconImage: UIImage
+    var precipitation: String?
+    var minTempText: String
+    var maxTempText: String
+    var gradientImage: UIImage
+}
