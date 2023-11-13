@@ -35,5 +35,15 @@ class ImageLiterals {
     
     static var cloudMoonIcon = UIImage(systemName: "cloud.moon.fill")!.withTintColor(.white)
     
-    //cloud.sun.rain.fill
+    static var todayTempGradient = UIImage(named: "today")!
+    static var oneDayTempGradient = UIImage(named: "oneDay")!
+    static var twoDayTempGradient = UIImage(named: "twoDay")!
+    static var threeDayTempGradient = UIImage(named: "threeDay")!
+    static var fourDayTempGradient = UIImage(named: "fourDay")!
+    static var fiveDayTempGradient = UIImage(named: "fiveDay")!
+    static var sixDayTempGradient = UIImage(named: "sixDay")!
+    static var sevenDayTempGradient = UIImage(named: "sevenDay")!
+    static var eightDayTempGradient = UIImage(named: "eightDay")!
+    static var nineDayTempGradient = UIImage(named: "nineDay")!
+    static var tenDayTempGradient = UIImage(named: "tenDay")!
 }
