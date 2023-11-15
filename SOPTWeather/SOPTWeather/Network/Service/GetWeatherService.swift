@@ -6,3 +6,52 @@
 //
 
 import Foundation
+
+class GetWeatherService {
+    static let shared = GetWeatherService()
+        private init() {}
+        
+    func makeRequest(url: String) -> URLRequest {
+            let url = URL(string: url)!
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            let header = ["Content-Type": "application/json"]
+            header.forEach {
+                request.addValue($0.value, forHTTPHeaderField: $0.key)
+            }
+            return request
+        }
+        
+    func GetWeatherInfo(url: String) async throws -> WeatherDTO? {
+            do {
+                let request = self.makeRequest(url: url)
+                let (data, response) = try await URLSession.shared.data(for: request)
+                dump(request)
+                guard response is HTTPURLResponse else {
+                    throw NetworkError.responseError
+                }
+                dump(response)
+                return parseUserInfoData(data: data)
+            } catch {
+                throw error
+            }
+            
+        }
+        
+        
+        private func parseUserInfoData(data: Data) -> WeatherDTO? {
+            do {
+                let jsonDecoder = JSONDecoder()
+                let result = try jsonDecoder.decode(WeatherDTO.self, from: data)
+                return result
+            } catch {
+                print(error)
+                return nil
+            }
+        }
+        
+        private func configureHTTPError(errorCode: Int) -> Error {
+            return NetworkError(rawValue: errorCode)
+            ?? NetworkError.unknownError
+        }
+}
