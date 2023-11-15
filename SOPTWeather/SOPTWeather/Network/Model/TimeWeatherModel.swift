@@ -14,6 +14,7 @@ struct WeatherDateModel {
     var subTitle: String = ""
     var weatherText: String
     var maxminTemp: String
+    var currentTemp: String = ""
     var weatherinfomation: [TimeWeatherModel]
 }
 

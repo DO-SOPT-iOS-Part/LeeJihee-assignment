@@ -10,62 +10,14 @@ import UIKit
 class LocationListViewController: UIViewController {
     
     let pageController = WeatherDetailPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-    var cityWeatherList: [WeatherDateModel] = [
-        WeatherDateModel(cityName: "나의 위치",
-                         subTitle: "의정부시",
-                         weatherText: "흐림",
-                         maxminTemp: "최고:29° 최저:15°",
-                         weatherinfomation: [TimeWeatherModel(time: "Now", weatherIconImage: ImageLiterals.cloudMoonIcon, tempText: "21°"),
-                                             TimeWeatherModel(time: "10시", weatherIconImage: ImageLiterals.drizzleRainIcon, tempText: "21°"),
-                                             TimeWeatherModel(time: "11시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "12시", weatherIconImage: ImageLiterals.cloudBoltIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "13시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "14시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "24°"),
-                                             TimeWeatherModel(time: "15시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "26°"),
-                                             TimeWeatherModel(time: "16시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "28°"),
-                                             TimeWeatherModel(time: "17시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "29°")]),
-        WeatherDateModel(cityName: "노원시",
-                         weatherText: "흐림",
-                         maxminTemp: "최고:29° 최저:15°",
-                         weatherinfomation: [TimeWeatherModel(time: "Now", weatherIconImage: ImageLiterals.cloudMoonIcon, tempText: "23°"),
-                                             TimeWeatherModel(time: "10시", weatherIconImage: ImageLiterals.drizzleRainIcon, tempText: "21°"),
-                                             TimeWeatherModel(time: "11시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "12시", weatherIconImage: ImageLiterals.cloudBoltIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "13시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "14시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "24°"),
-                                             TimeWeatherModel(time: "15시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "26°"),
-                                             TimeWeatherModel(time: "16시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "28°"),
-                                             TimeWeatherModel(time: "17시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "29°")]),
-        WeatherDateModel(cityName: "화양시",
-                         weatherText: "흐림",
-                         maxminTemp: "최고:26° 최저:15°",
-                         weatherinfomation: [TimeWeatherModel(time: "Now", weatherIconImage: ImageLiterals.cloudMoonIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "10시", weatherIconImage: ImageLiterals.drizzleRainIcon, tempText: "21°"),
-                                             TimeWeatherModel(time: "11시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "12시", weatherIconImage: ImageLiterals.cloudBoltIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "13시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "14시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "24°"),
-                                             TimeWeatherModel(time: "15시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "26°"),
-                                             TimeWeatherModel(time: "16시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "26°"),
-                                             TimeWeatherModel(time: "17시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "29°")]),
-        WeatherDateModel(cityName: "고양시",
-                         weatherText: "흐림",
-                         maxminTemp: "최고:25° 최저:14°",
-                         weatherinfomation: [TimeWeatherModel(time: "Now", weatherIconImage: ImageLiterals.cloudMoonIcon, tempText: "16°"),
-                                             TimeWeatherModel(time: "10시", weatherIconImage: ImageLiterals.drizzleRainIcon, tempText: "21°"),
-                                             TimeWeatherModel(time: "11시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "12시", weatherIconImage: ImageLiterals.cloudBoltIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "13시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "19°"),
-                                             TimeWeatherModel(time: "14시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "25°"),
-                                             TimeWeatherModel(time: "15시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "25°"),
-                                             TimeWeatherModel(time: "16시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "25°"),
-                                             TimeWeatherModel(time: "17시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "23°")])]
-    
     let locationView = LocationListView()
+    let locationList = ["iksan", "jeonju", "jeju", "cheonan", "cheongju", "chuncheon"]
+    var infoList: [WeatherDateModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
+        testNetwork()
         bindVC()
         setDelegate()
         addView()
@@ -93,6 +45,20 @@ class LocationListViewController: UIViewController {
         }
     }
     
+    func testNetwork(){
+        for i in 0..<locationList.count {
+            Task {
+                if let result = try await GetWeatherService.shared.GetWeatherInfo(location: locationList[i]) {
+                    print(result)
+                    let maxminText = "\(Int(result.main.tempMax))° \(Int(result.main.tempMin))°"
+                    let krName = translateCityNameToKorean(name: locationList[i])
+                    infoList.append(WeatherDateModel(cityName: krName, weatherText: result.weather[0].description, maxminTemp: maxminText,currentTemp: "\(Int(result.main.temp))°", weatherinfomation: []))
+                }
+                locationView.weatherTableView.reloadData()
+            }
+        }
+        
+    }
     
 }
 
@@ -119,16 +85,27 @@ extension LocationListViewController: UITableViewDelegate {
 
 extension LocationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cityWeatherList.count
+        return infoList.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WeatherListTableViewCell.cellReuseIdentifier, for: indexPath) as! WeatherListTableViewCell
-        cell.weatherData = self.cityWeatherList[indexPath.row]
+        cell.weatherData = infoList[indexPath.row]
         cell.selectionStyle = .none
         return cell
     }
     
+    func translateCityNameToKorean(name: String) -> String {
+            let translations: [String: String] = [
+                "iksan":"익산",
+                "jeonju":"전주",
+                "jeju":"제주",
+                "cheonan":"천안",
+                "cheongju":"청주",
+                "chuncheon":"춘천"
+            ]
+            return translations[name] ?? name
+        }
     
 }

@@ -11,8 +11,8 @@ class GetWeatherService {
     static let shared = GetWeatherService()
         private init() {}
         
-    func makeRequest(url: String) -> URLRequest {
-            let url = URL(string: url)!
+    func makeRequest(location: String) -> URLRequest {
+        let url = URL(string:"\(Config.baseURL)?q=\(location)&units=metric&lang=kr&appid=\(Config.apiKey)")!
             var request = URLRequest(url: url)
             request.httpMethod = "GET"
             let header = ["Content-Type": "application/json"]
@@ -22,9 +22,9 @@ class GetWeatherService {
             return request
         }
         
-    func GetWeatherInfo(url: String) async throws -> WeatherDTO? {
+    func GetWeatherInfo(location: String) async throws -> WeatherDTO? {
             do {
-                let request = self.makeRequest(url: url)
+                let request = self.makeRequest(location: location)
                 let (data, response) = try await URLSession.shared.data(for: request)
                 dump(request)
                 guard response is HTTPURLResponse else {
