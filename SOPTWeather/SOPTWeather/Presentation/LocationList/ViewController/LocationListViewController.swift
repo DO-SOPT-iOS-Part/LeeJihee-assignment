@@ -12,7 +12,7 @@ class LocationListViewController: UIViewController {
     let pageController = WeatherDetailPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     let locationView = LocationListView()
     let locationList = ["iksan", "jeonju", "jeju", "cheonan", "cheongju", "chuncheon"]
-    var infoList: [WeatherDateModel] = []
+    var infoList: [] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class LocationListViewController: UIViewController {
                     print(result)
                     let maxminText = "\(Int(result.main.tempMax))° \(Int(result.main.tempMin))°"
                     let krName = translateCityNameToKorean(name: locationList[i])
-                    infoList.append(WeatherDateModel(cityName: krName, weatherText: result.weather[0].description, maxminTemp: maxminText,currentTemp: "\(Int(result.main.temp))°", weatherinfomation: []))
+                    infoList.append((cityName: krName, weatherText: result.weather[0].description, maxminTemp: maxminText,currentTemp: "\(Int(result.main.temp))°", weatherinfomation: []))
                 }
                 locationView.weatherTableView.reloadData()
             }

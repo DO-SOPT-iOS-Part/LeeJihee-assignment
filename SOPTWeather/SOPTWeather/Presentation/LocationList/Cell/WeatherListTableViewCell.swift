@@ -11,7 +11,7 @@ class WeatherListTableViewCell: UITableViewCell {
     
     static let cellReuseIdentifier = "cellReuseIdentifier"
     
-    var weatherData = WeatherDateModel(cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: []){
+    var weatherData = (cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: []){
         didSet{
             bindData()
         }

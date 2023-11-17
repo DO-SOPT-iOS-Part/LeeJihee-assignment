@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: WeatherDateModel - 도시별 상세 날씨 정보
 
-struct WeatherDateModel {
+struct WeatherDataModel {
     var cityName: String
     var subTitle: String = ""
     var weatherText: String
@@ -34,8 +34,8 @@ struct DayWeatherModel {
     var gradientImage: UIImage
 }
 
-var cityWeatherList: [WeatherDateModel] = [
-    WeatherDateModel(cityName: "나의 위치",
+var cityWeatherList: [WeatherDataModel] = [
+    WeatherDataModel(cityName: "나의 위치",
                      subTitle: "의정부시",
                      weatherText: "흐림",
                      maxminTemp: "최고:29° 최저:15°",
@@ -48,7 +48,7 @@ var cityWeatherList: [WeatherDateModel] = [
                                          TimeWeatherModel(time: "15시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "26°"),
                                          TimeWeatherModel(time: "16시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "28°"),
                                          TimeWeatherModel(time: "17시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "29°")]),
-    WeatherDateModel(cityName: "노원시",
+    WeatherDataModel(cityName: "노원시",
                      weatherText: "흐림",
                      maxminTemp: "최고:29° 최저:15°",
                      weatherinfomation: [TimeWeatherModel(time: "Now", weatherIconImage: ImageLiterals.cloudMoonIcon, tempText: "23°"),
@@ -60,7 +60,7 @@ var cityWeatherList: [WeatherDateModel] = [
                                          TimeWeatherModel(time: "15시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "26°"),
                                          TimeWeatherModel(time: "16시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "28°"),
                                          TimeWeatherModel(time: "17시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "29°")]),
-    WeatherDateModel(cityName: "화양시",
+    WeatherDataModel(cityName: "화양시",
                      weatherText: "흐림",
                      maxminTemp: "최고:26° 최저:15°",
                      weatherinfomation: [TimeWeatherModel(time: "Now", weatherIconImage: ImageLiterals.cloudMoonIcon, tempText: "19°"),
@@ -72,7 +72,7 @@ var cityWeatherList: [WeatherDateModel] = [
                                          TimeWeatherModel(time: "15시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "26°"),
                                          TimeWeatherModel(time: "16시", weatherIconImage: ImageLiterals.heavyRainIcon, tempText: "26°"),
                                          TimeWeatherModel(time: "17시", weatherIconImage: ImageLiterals.cloudSunRainIcon, tempText: "29°")]),
-    WeatherDateModel(cityName: "고양시",
+    WeatherDataModel(cityName: "고양시",
                      weatherText: "흐림",
                      maxminTemp: "최고:25° 최저:14°",
                      weatherinfomation: [TimeWeatherModel(time: "Now", weatherIconImage: ImageLiterals.cloudMoonIcon, tempText: "16°"),

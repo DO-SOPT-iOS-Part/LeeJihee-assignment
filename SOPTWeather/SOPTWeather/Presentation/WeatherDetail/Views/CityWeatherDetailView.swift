@@ -12,7 +12,7 @@ import SnapKit
 class CityWeatherDetailView: UIView {
     // MARK: - Variables
     // MARK: Property
-    var detailWeatherData: WeatherDateModel = WeatherDateModel(cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: [])
+    var detailWeatherData:  = (cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: [])
     var weekWeatherData: [DayWeatherModel] = []
     
     // MARK: Component
