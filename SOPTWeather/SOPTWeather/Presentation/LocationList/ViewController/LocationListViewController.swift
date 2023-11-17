@@ -17,7 +17,7 @@ class LocationListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
-        testNetwork()
+        getWeatherInfo()
         bindVC()
         setDelegate()
         addView()
@@ -45,7 +45,7 @@ class LocationListViewController: UIViewController {
         }
     }
     
-    func testNetwork(){
+    func getWeatherInfo(){
         for i in 0..<locationList.count {
             Task {
                 if let result = try await GetWeatherService.shared.GetWeatherInfo(location: locationList[i]) {
