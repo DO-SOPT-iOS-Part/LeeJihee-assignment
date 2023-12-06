@@ -10,7 +10,7 @@ import SnapKit
 
 class LocationListElementView: UIButton {
     
-    var weatherData = WeatherDateModel(cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: []){
+    var weatherData = (cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: []){
         didSet{
             bindData()
         }

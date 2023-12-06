@@ -11,7 +11,7 @@ class WeatherListTableViewCell: UITableViewCell {
     
     static let cellReuseIdentifier = "cellReuseIdentifier"
     
-    var weatherData = WeatherDateModel(cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: []){
+    var weatherData = (cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: []){
         didSet{
             bindData()
         }
@@ -79,7 +79,13 @@ class WeatherListTableViewCell: UITableViewCell {
         locationTitleLabel.text = weatherData.cityName
         locationLabel.text = weatherData.subTitle
         weatherLabel.text = weatherData.weatherText
-        tempLabel.text = weatherData.weatherinfomation.first?.tempText
+        
+        if weatherData.currentTemp == "" {
+            tempLabel.text = weatherData.weatherinfomation.first?.tempText
+        } else {
+            tempLabel.text = weatherData.currentTemp
+        }
+        
         maxMinTempLabel.text = weatherData.maxminTemp
         setUI()
     }

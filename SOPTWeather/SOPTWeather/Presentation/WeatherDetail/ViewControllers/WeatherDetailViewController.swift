@@ -28,7 +28,7 @@ class WeatherDetailViewController: UIViewController {
     
     let weatherDetailView = WeatherDetailView()
     let cityWeatherDeatilView = CityWeatherDetailView()
-    var weatherData = WeatherDateModel(cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: [])
+    var weatherData = (cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
