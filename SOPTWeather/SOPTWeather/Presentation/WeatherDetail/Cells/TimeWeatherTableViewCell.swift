@@ -11,13 +11,19 @@ class TimeWeatherTableViewCell: UITableViewCell {
     
     static let reuseId = "TimeWeatherTableViewCell"
 
-    var detailLabel: UILabel = {
+    let detailLabel: UILabel = {
         let label = UILabel()
         label.text = "08:00~09:00에 강우 상태가, 18:00에 한때 흐린 상태가 예상됩니다."
         label.font = .sfProRegular18
         label.textColor = .white
         label.numberOfLines = 3
         return label
+    }()
+    
+    let lineView: UIView = {
+       let view = UIView()
+        view.backgroundColor = .white
+        return view
     }()
     
     lazy var timeWeatherCollectionView: UICollectionView =  {
@@ -54,12 +60,16 @@ class TimeWeatherTableViewCell: UITableViewCell {
     private func setViewHierarchy() {
         
         self.backgroundColor = .clear
-        self.contentView.backgroundColor = .white.withAlphaComponent(0.1)
+        self.contentView.backgroundColor = .white.withAlphaComponent(0.03)
         self.contentView.layer.cornerRadius = 20
-        self.contentView.addSubViews(detailLabel, timeWeatherCollectionView)
+        self.contentView.addSubViews(detailLabel, lineView, timeWeatherCollectionView)
     }
     
     private func setConstraints() {
+        
+        self.contentView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(10)
+        }
         
         detailLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
@@ -67,9 +77,16 @@ class TimeWeatherTableViewCell: UITableViewCell {
             $0.centerX.equalToSuperview()
         }
         
+        lineView.snp.makeConstraints {
+            $0.top.equalTo(detailLabel.snp.bottom).offset(11)
+            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.height.equalTo(0.2)
+        }
+        
         timeWeatherCollectionView.snp.makeConstraints {
-            $0.top.equalTo(detailLabel.snp.bottom).offset(5)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(lineView.snp.bottom).offset(11)
+            $0.leading.trailing.equalToSuperview()
+            $0.bottom.equalToSuperview().inset(10)
             $0.height.equalTo(140)
         }
     }

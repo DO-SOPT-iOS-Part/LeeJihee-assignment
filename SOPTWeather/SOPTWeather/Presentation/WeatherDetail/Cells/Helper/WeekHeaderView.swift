@@ -37,6 +37,13 @@ final class WeekHeaderView: UITableViewHeaderFooterView {
         return stackView
     }()
     
+    let backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white.withAlphaComponent(0.02)
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
     
     // MARK: - Function
     // MARK: LifeCycle
@@ -56,12 +63,18 @@ final class WeekHeaderView: UITableViewHeaderFooterView {
     }
     
     private func setViewHierarchy() {
-        self.addSubViews(titleStackView)
+        
+        self.addSubViews(backView, titleStackView)
     }
     
     private func setConstraints() {
+        backView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.height.equalTo(675)
+        }
         titleStackView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(8)
+            $0.top.equalToSuperview().offset(10)
             $0.leading.equalToSuperview().offset(15)
         }
     }

@@ -144,4 +144,14 @@ extension CityWeatherView: UITableViewDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        switch section {
+        case 0 :
+            return 30
+        case 1:
+            return 10
+        default:
+            return 0 
+        }
+    }
 }
