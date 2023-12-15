@@ -10,54 +10,23 @@ import UIKit
 class LocationListViewController: UIViewController {
     
     let pageController = WeatherDetailPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-    let locationView = LocationListView()
-    let locationList = ["iksan", "jeonju", "jeju", "cheonan", "cheongju", "chuncheon"]
-    var infoList: [] = []
+    let locationListView = LocationListView()
+    
+    
+    override func loadView() {
+        self.view = locationListView
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = true
-        getWeatherInfo()
-        bindVC()
         setDelegate()
-        addView()
-    }
-    
-    private func addView() {
-        view.addSubview(locationView)
-        locationView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
-        }
     }
     
     private func setDelegate() {
-        locationView.searchBar.delegate = self
-        locationView.weatherTableView.dataSource = self
-        locationView.weatherTableView.delegate = self
-    }
-    
-    private func bindVC(){
-        
-        for i in 0..<cityWeatherList.count {
-            let weatherDeatilViewController = WeatherDetailViewController()
-            weatherDeatilViewController.weatherData = cityWeatherList[i]
-            pageController.contentControllers.append(weatherDeatilViewController)
-        }
-    }
-    
-    func getWeatherInfo(){
-        for i in 0..<locationList.count {
-            Task {
-                if let result = try await GetWeatherService.shared.GetWeatherInfo(location: locationList[i]) {
-                    print(result)
-                    let maxminText = "\(Int(result.main.tempMax))° \(Int(result.main.tempMin))°"
-                    let krName = translateCityNameToKorean(name: locationList[i])
-                    infoList.append((cityName: krName, weatherText: result.weather[0].description, maxminTemp: maxminText,currentTemp: "\(Int(result.main.temp))°", weatherinfomation: []))
-                }
-                locationView.weatherTableView.reloadData()
-            }
-        }
-        
+        locationListView.searchBar.delegate = self
+        locationListView.weatherTableView.dataSource = self
+        locationListView.weatherTableView.delegate = self
     }
     
 }
@@ -70,7 +39,7 @@ extension LocationListViewController: UISearchBarDelegate {
         } else {
             let filteredCities = cityWeatherList.filter { $0.cityName.lowercased().contains(searchText.lowercased()) }
             cityWeatherList = filteredCities
-            locationView.weatherTableView.reloadData()
+            locationListView.weatherTableView.reloadData()
         }
     }
 }
@@ -85,13 +54,13 @@ extension LocationListViewController: UITableViewDelegate {
 
 extension LocationListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return infoList.count
+        return 4
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: WeatherListTableViewCell.cellReuseIdentifier, for: indexPath) as! WeatherListTableViewCell
-        cell.weatherData = infoList[indexPath.row]
+      //  cell.weatherData = infoList[indexPath.row]
         cell.selectionStyle = .none
         return cell
     }
