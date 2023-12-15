@@ -11,11 +11,7 @@ class WeatherListTableViewCell: UITableViewCell {
     
     static let cellReuseIdentifier = "cellReuseIdentifier"
     
-    var weatherData = (cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: []){
-        didSet{
-            bindData()
-        }
-    }
+    var weatherData = (cityName: "", weatherText: "", maxminTemp: "", weatherinfomation: [])
     
     private let backgroundImageView: UIImageView = {
        let imageView = UIImageView()
@@ -74,21 +70,6 @@ class WeatherListTableViewCell: UITableViewCell {
             // Cell 간격 조정
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 0))
       }
-    
-    func bindData() {
-        locationTitleLabel.text = weatherData.cityName
-        locationLabel.text = weatherData.subTitle
-        weatherLabel.text = weatherData.weatherText
-        
-        if weatherData.currentTemp == "" {
-            tempLabel.text = weatherData.weatherinfomation.first?.tempText
-        } else {
-            tempLabel.text = weatherData.currentTemp
-        }
-        
-        maxMinTempLabel.text = weatherData.maxminTemp
-        setUI()
-    }
     
     private func setUI(){
         setViewHierarchy()

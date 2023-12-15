@@ -1,14 +1,15 @@
 //
-//  WeeklyWeatherCollectionViewCell.swift
+//  WeekWeatherTableViewCell.swift
 //  SOPTWeather
 //
-//  Created by 지희의 MAC on 2023/11/08.
+//  Created by 지희의 MAC on 12/12/23.
 //
 
 import UIKit
 
-class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
-    
+class WeekWeatherTableViewCell: UITableViewCell {
+
+    static let reuseId = "WeekWeatherTableViewCell"
     
     private let weekLabel: UILabel = {
         let label = UILabel()
@@ -67,14 +68,16 @@ class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         setUI()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     func setData(week:String, icon: UIImage, min:String, gradient: UIImage, max: String) {
         weekLabel.text = week
@@ -90,6 +93,7 @@ class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
     }
     
     private func setViewHierarchy() {
+        self.backgroundColor = .clear
         self.addSubViews(horizontalStackView)
     }
     
@@ -98,9 +102,5 @@ class WeeklyWeatherCollectionViewCell: UICollectionViewCell {
             $0.center.equalToSuperview()
         }
     }
-    
-}
-
-extension WeeklyWeatherCollectionViewCell: CollectionViewCellReuseProtocol {
     
 }

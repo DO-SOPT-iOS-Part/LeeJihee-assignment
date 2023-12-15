@@ -70,9 +70,9 @@ class LocationListElementView: UIButton {
     
     func bindData() {
         locationTitleLabel.text = weatherData.cityName
-        locationLabel.text = weatherData.subTitle
+     //   locationLabel.text = weatherData.subTitle
         weatherLabel.text = weatherData.weatherText
-        tempLabel.text = weatherData.weatherinfomation.first?.tempText
+      //  tempLabel.text = weatherData.weatherinfomation.first?.tempText
         maxMinTempLabel.text = weatherData.maxminTemp
         setUI()
     }
